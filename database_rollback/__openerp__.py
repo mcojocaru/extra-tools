@@ -21,7 +21,7 @@
 {
     'name': 'Database Rollback',
     'version': '8.0.1.0.0',
-    'category': 'web',
+    'category': 'Extra Tools',
     'author': "Cojocaru Marcel <marcel.cojocaru@gmail.com>",
     'website': 'https://github.com/mcojocaru/extra-tools',
     'license': 'AGPL-3',
