@@ -22,8 +22,8 @@
     'name': 'Database Rollback',
     'version': '8.0.1.0.0',
     'category': 'web',
-    'author': "Cojocaru Marcel <marcel.cojocaru@gmail.com>, Odoo Community Association (OCA)",
-    'website': 'https://github.com/OCA/server-ux',
+    'author': "Cojocaru Marcel <marcel.cojocaru@gmail.com>",
+    'website': 'https://github.com/mcojocaru/extra-tools',
     'license': 'AGPL-3',
     'depends': [
         'web',
