@@ -1,9 +1,9 @@
-# coding: utf-8
-#  -*- encoding: utf-8 -*-
+# -*- encoding: utf-8 -*-
 # #############################################################################
 #
-#    Authors: Cojocaru Marcel (marcel.cojocaru@gmail.com)
-#    Copyright (c) 2019 Cojocaru Aurelian Marcel PFA
+#    Web Easy Switch Company module for OpenERP
+#    Copyright (C) 2014 GRAP (http://www.grap.coop)
+#    @author Sylvain LE GAL (https://twitter.com/legalsylvain)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -26,27 +26,24 @@ import openerp.tools.config as config
 from openerp import exceptions, _
 
 
-
 class DBRollbackController(http.Controller):
     @http.route(
         '/web_database_rollback/activate',
-        type='json', auth='user')
+        type='json', auth='none')
     def activate(self):
         if config['workers'] > 0:
             raise exceptions.Warning(_('Number of workers in Odoo configuration file should be 0.'))
-
         registry = openerp.modules.registry.RegistryManager.get(
             request.session.db)
-        if registry.test_cr is None:
+        if registry.test_cr == None:
             registry.enter_test_mode()
-            registry.clear_caches()
 
     @http.route(
         '/web_database_rollback/rollback',
-        type='json', auth='user')
+        type='json', auth='none')
     def rollback(self):
         registry = openerp.modules.registry.RegistryManager.get(
             request.session.db)
-        if registry.test_cr is not None:
+        if registry.test_cr != None:
             registry.leave_test_mode()
-            registry.clear_caches()
+

@@ -1,46 +1,36 @@
-// Copyright (C) 2019 Cojocaru Aurelian Marcel PFA
-// @author Marcel Cojocaru <marcel.cojocaru@gmail.com>
-// License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-openerp.web_database_rollback = function (instance) {
-    'use strict';
-    instance.web_database_rollback.RollbackButtonsWidget = instance.web.Widget
-        .extend({
+odoo.define('web.web_database_rollback',function (require) {
 
-            template:'web_database_rollback.ButtonsWidget',
+    "use strict";
 
-            renderElement: function () {
-                var self = this;
-                this._super();
-                this.$el.show();
-                this.$el.find('.activate').on('click', function () {
-                    self.$el.find('.activate').css("background-color", "green")
-                        .css("color", "white");
-                    self.rpc('/web_database_rollback/activate', {});
-                });
+    var Widget = require('web.Widget');
+    var SystrayMenu = require('web.SystrayMenu');
+    var web_client = require('web.web_client');
 
-                this.$el.find('.rollback').on('click', function () {
-                    self.$el.find('.activate')
-                        .css("background-color", "buttonface")
-                        .css("color", "#777");
-                    self.rpc('/web_database_rollback/rollback', {});
-                });
-            },
-        });
+    var ButtonsWidget = Widget.extend({
 
-    instance.web.UserMenu.include({
-        do_update: function () {
-            this._super();
+        template:'web_database_rollback.ButtonsWidget',
+
+        renderElement: function() {
             var self = this;
-            this.update_promise.done(function () {
-                if (!_.isUndefined(self.rollbackButtons)) {
-                    return;
-                }
-                self.rollbackButtons = new instance.web_database_rollback
-                    .RollbackButtonsWidget(self);
-                self.rollbackButtons.prependTo(
-                    instance.webclient.$('.oe_systray'));
+            this._super();
+            this.$el.show();
+            this.$el.find('.activate').on('click', function(ev) {
+                    self.$el.find('.activate').css("background-color", "green").css("color", "white");
+                    var func = '/web_database_rollback/activate';
+                    self.rpc(func, {}).done(function(res) {
+                    });
+            });
+
+            this.$el.find('.rollback').on('click', function(ev) {
+                    self.$el.find('.activate').css("background-color", "buttonface")
+                        .css("color", "#777");
+                    var func = '/web_database_rollback/rollback';
+                    self.rpc(func, {}).done(function(res) {
+                    });
             });
         },
     });
 
-};
+    SystrayMenu.Items.push(ButtonsWidget);
+
+});
