@@ -3,7 +3,8 @@
     'name': 'Database Rollback',
     'version': '9.0.1.0.0',
     'category': 'web',
-    'author': "",
+    'author': "Cojocaru Marcel <marcel.cojocaru@gmail.com>",
+    'company': "Cojocaru Marcel Software PFA",
     'website': '',
     'license': 'AGPL-3',
     'depends': [
