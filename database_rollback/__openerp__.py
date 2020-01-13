@@ -23,6 +23,7 @@
     'version': '8.0.1.0.0',
     'category': 'Extra Tools',
     'author': "Cojocaru Marcel <marcel.cojocaru@gmail.com>",
+    'company': "Cojocaru Marcel Software PFA",
     'website': 'https://github.com/mcojocaru/extra-tools',
     'license': 'AGPL-3',
     'depends': [
