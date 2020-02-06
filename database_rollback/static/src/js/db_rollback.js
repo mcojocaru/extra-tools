@@ -1,12 +1,12 @@
 // Copyright (C) 2019 Cojocaru Aurelian Marcel PFA
 // @author Marcel Cojocaru <marcel.cojocaru@gmail.com>
 // License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-openerp.web_database_rollback = function (instance) {
+openerp.database_rollback = function (instance) {
     'use strict';
-    instance.web_database_rollback.RollbackButtonsWidget = instance.web.Widget
+    instance.database_rollback.RollbackButtonsWidget = instance.web.Widget
         .extend({
 
-            template:'web_database_rollback.ButtonsWidget',
+            template:'database_rollback.ButtonsWidget',
 
             renderElement: function () {
                 var self = this;
@@ -15,14 +15,14 @@ openerp.web_database_rollback = function (instance) {
                 this.$el.find('.activate').on('click', function () {
                     self.$el.find('.activate').css("background-color", "green")
                         .css("color", "white");
-                    self.rpc('/web_database_rollback/activate', {});
+                    self.rpc('/database_rollback/activate', {});
                 });
 
                 this.$el.find('.rollback').on('click', function () {
                     self.$el.find('.activate')
                         .css("background-color", "buttonface")
                         .css("color", "#777");
-                    self.rpc('/web_database_rollback/rollback', {});
+                    self.rpc('/database_rollback/rollback', {});
                 });
             },
         });
@@ -35,7 +35,7 @@ openerp.web_database_rollback = function (instance) {
                 if (!_.isUndefined(self.rollbackButtons)) {
                     return;
                 }
-                self.rollbackButtons = new instance.web_database_rollback
+                self.rollbackButtons = new instance.database_rollback
                     .RollbackButtonsWidget(self);
                 self.rollbackButtons.prependTo(
                     instance.webclient.$('.oe_systray'));

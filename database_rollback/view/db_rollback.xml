@@ -4,7 +4,7 @@
 
         <template id="assets_backend" name="web_db_rollback assets" inherit_id="web.assets_backend">
             <xpath expr="." position="inside">
-                <script type="text/javascript" src="/web_database_rollback/static/src/js/db_rollback.js"></script>
+                <script type="text/javascript" src="/database_rollback/static/src/js/db_rollback.js"></script>
             </xpath>
         </template>
 
