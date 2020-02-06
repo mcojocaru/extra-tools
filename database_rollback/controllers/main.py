@@ -28,7 +28,7 @@ from openerp import exceptions, _
 
 class DBRollbackController(http.Controller):
     @http.route(
-        '/web_database_rollback/activate',
+        '/database_rollback/activate',
         type='json', auth='none')
     def activate(self):
         if config['workers'] > 0:
@@ -39,7 +39,7 @@ class DBRollbackController(http.Controller):
             registry.enter_test_mode()
 
     @http.route(
-        '/web_database_rollback/rollback',
+        '/database_rollback/rollback',
         type='json', auth='none')
     def rollback(self):
         registry = openerp.modules.registry.RegistryManager.get(
