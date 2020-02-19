@@ -25,6 +25,7 @@
     'author': "Cojocaru Marcel <marcel.cojocaru@gmail.com>",
     'company': "Cojocaru Marcel Software PFA",
     'website': 'https://github.com/mcojocaru/extra-tools',
+    'summary': 'This module allows to revert the database state prior to a certain moment chosen by the user.',
     'license': 'AGPL-3',
     'depends': [
         'web',
