@@ -7,8 +7,6 @@
     'company': "Cojocaru Marcel Software PFA",
     'website': '',
     'summary': 'This module allows to revert the database state prior to a certain moment chosen by the user.',
-    'description': 'This module allows to revert the database state prior to a certain moment chosen by the user.',
-
     'license': 'AGPL-3',
     'depends': [
         'web',
