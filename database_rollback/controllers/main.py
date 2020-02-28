@@ -19,31 +19,27 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 #############################################################################
-import openerp
-import openerp.http as http
-from openerp.http import request
-import openerp.tools.config as config
-from openerp import exceptions, _
+import odoo
+import odoo.http as http
+from odoo.http import request
+import odoo.tools.config as config
+from odoo import exceptions, _
 
 
 class DBRollbackController(http.Controller):
-    @http.route(
-        '/database_rollback/activate',
-        type='json', auth='none')
+    @http.route('/database_rollback/activate', type='json', auth='none')
     def activate(self):
         if config['workers'] > 0:
             raise exceptions.Warning(_('Number of workers in Odoo configuration file should be 0.'))
-        registry = openerp.modules.registry.RegistryManager.get(
+        registry = odoo.modules.registry.RegistryManager.get(
             request.session.db)
-        if registry.test_cr == None:
+        if registry.test_cr is None:
             registry.enter_test_mode()
 
-    @http.route(
-        '/database_rollback/rollback',
-        type='json', auth='none')
+    @http.route('/database_rollback/rollback', type='json', auth='none')
     def rollback(self):
-        registry = openerp.modules.registry.RegistryManager.get(
+        registry = odoo.modules.registry.RegistryManager.get(
             request.session.db)
-        if registry.test_cr != None:
+        if registry.test_cr is not None:
             registry.leave_test_mode()
 
