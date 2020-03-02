@@ -5,19 +5,18 @@ odoo.define('web.database_rollback',function (require) {
     var Widget = require('web.Widget');
     var SystrayMenu = require('web.SystrayMenu');
     var web_client = require('web.web_client');
-
     var ButtonsWidget = Widget.extend({
 
         template:'database_rollback.ButtonsWidget',
 
-        renderElement: function() {
+        start: function() {
             var self = this;
             this._super();
             this.$el.show();
             this.$el.find('.activate').on('click', function(ev) {
                     self.$el.find('.activate').css("background-color", "green").css("color", "white");
                     var func = '/database_rollback/activate';
-                    self.rpc(func, {}).done(function(res) {
+                    self._rpc({route:func, params:{}}).done(function(res) {
                     });
             });
 
@@ -25,12 +24,13 @@ odoo.define('web.database_rollback',function (require) {
                     self.$el.find('.activate').css("background-color", "buttonface")
                         .css("color", "#777");
                     var func = '/database_rollback/rollback';
-                    self.rpc(func, {}).done(function(res) {
+                    self._rpc({route:func, params:{}}).done(function(res) {
                     });
             });
         },
     });
 
     SystrayMenu.Items.push(ButtonsWidget);
+    return ButtonsWidget;
 
 });

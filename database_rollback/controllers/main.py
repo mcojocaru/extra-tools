@@ -24,22 +24,25 @@ import odoo.http as http
 from odoo.http import request
 import odoo.tools.config as config
 from odoo import exceptions, _
-
+from odoo.tests import common
 
 class DBRollbackController(http.Controller):
     @http.route('/database_rollback/activate', type='json', auth='none')
     def activate(self):
         if config['workers'] > 0:
             raise exceptions.Warning(_('Number of workers in Odoo configuration file should be 0.'))
-        registry = odoo.modules.registry.RegistryManager.get(
-            request.session.db)
+        registry = odoo.registry(common.get_db_name())
         if registry.test_cr is None:
             registry.enter_test_mode()
 
     @http.route('/database_rollback/rollback', type='json', auth='none')
     def rollback(self):
-        registry = odoo.modules.registry.RegistryManager.get(
-            request.session.db)
+        registry = odoo.registry(common.get_db_name())
         if registry.test_cr is not None:
             registry.leave_test_mode()
-
+            registry.init(common.get_db_name())
+            request.cr()
+        return {
+            'type': 'ir.actions.client',
+            'tag': 'reload',
+        }
