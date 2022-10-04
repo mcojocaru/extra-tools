@@ -40,7 +40,8 @@ class DBRollbackController(http.Controller):
         registry = odoo.registry(common.get_db_name())
         if registry.test_cr is not None:
             registry.leave_test_mode()
-            registry.init(common.get_db_name())
+            db_name = common.get_db_name()
+            odoo.registry(db_name)
         return {
             'type': 'ir.actions.client',
             'tag': 'reload',
